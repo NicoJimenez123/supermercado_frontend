@@ -1,8 +1,12 @@
 import React from "react";
+import { ListadoProductos } from "./ListadoProductos";
 
 const App = () => {
   return (
-    <h1>Hola Mundo desde React</h1>
+    <div>
+      <h1>Listado de Productos</h1>
+      <ListadoProductos />
+    </div>
   );
 }
 
