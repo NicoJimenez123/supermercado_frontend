@@ -1,9 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from 'react'
 
-const App = () => {
+const ListadoProductos = () => {
+  const [ listado, setListado ] = useState([])
+  const obtenerListado = async () => {
+    const response = await fetch(`http://${process.env.REACT_APP_BACKEND_IP}/tienda/productos`)
+    const data = await response.json()
+    console.log(data)
+    setListado(data)
+  }
+  useEffect( () => {
+    obtenerListado()
+  }, [])
   return (
-    <h1>Hola Mundo desde React</h1>
-  );
+    <div>
+      <div>
+        { listado.map((producto) => (
+          <ul key={producto.id}>
+            <li>{producto.nombre}</li>
+            <li>{producto.prese}</li>
+            <li>{producto.precio}</li>
+            <li>{producto.stock ? 'Tiene Stock' : 'Sin Stock'}</li>
+          </ul>
+        ))}
+      </div>  
+    </div>
+  )
 }
 
-export default App
+export { ListadoProductos }
