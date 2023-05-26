@@ -1,27 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import React from 'react'
 
-const ListadoProductos = () => {
-  const [ listado, setListado ] = useState([])
-  const obtenerListado = async () => {
-    const response = await fetch(`http://${process.env.REACT_APP_BACKEND_IP}/tienda/productos`)
-                            .then(res => res.json())
-    setListado(response)
+const ListadoProductos = ({listadoProductos, listarProductos}) => {
+
+  const borrarProducto = async (productoID) => {
+    let response = await axios.delete(`http://${process.env.REACT_APP_BACKEND_IP}/tienda/productos/`+ productoID).then(res => res.status)
+    listarProductos()
+    console.log(response)
   }
-  useEffect( () => {
-    obtenerListado()
-  }, [])
-  return (
-    <div>
-      <div>
-        { listado.map((producto) => (
+
+  const obtenerListadoProductos = () => {
+    console.log(listadoProductos)
+    if(listadoProductos) {
+      return (
+        listadoProductos.map(producto => (
           <ul key={producto.id}>
             <li>{producto.nombre}</li>
             <li>{producto.prese}</li>
             <li>{producto.precio}</li>
             <li>{producto.stock ? 'Tiene Stock' : 'Sin Stock'}</li>
+            <button onClick={() => borrarProducto(producto.id)}>Borrar Producto</button>
           </ul>
-        ))}
-      </div>  
+        ))
+      )
+    } else {
+      return (
+        <div>
+          No hay Productos
+        </div>
+      )
+    }
+  }
+
+  return (
+    <div>
+      {obtenerListadoProductos()}  
     </div>
   )
 }
