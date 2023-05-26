@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-const AgregarProducto = () => {
+const AgregarProducto = ({listarProductos}) => {
   const [ producto, setProducto ] = useState({})
 
   const crearProducto = () => {
@@ -17,6 +17,7 @@ const AgregarProducto = () => {
     let response = await axios.post(`http://${process.env.REACT_APP_BACKEND_IP}/tienda/productos`, {
       nombre, prese, precio, stock
     }).then(res => res.data)
+    listarProductos()
     setProducto(response)
   }
 
