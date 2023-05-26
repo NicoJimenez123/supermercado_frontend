@@ -4,9 +4,8 @@ const ListadoProductos = () => {
   const [ listado, setListado ] = useState([])
   const obtenerListado = async () => {
     const response = await fetch(`http://${process.env.REACT_APP_BACKEND_IP}/tienda/productos`)
-    const data = await response.json()
-    console.log(data)
-    setListado(data)
+                            .then(res => res.json())
+    setListado(response)
   }
   useEffect( () => {
     obtenerListado()
