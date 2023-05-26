@@ -10,7 +10,6 @@ const ListadoProductos = ({listadoProductos, listarProductos}) => {
   }
 
   const obtenerListadoProductos = () => {
-    console.log(listadoProductos)
     if(listadoProductos) {
       return (
         listadoProductos.map(producto => (
