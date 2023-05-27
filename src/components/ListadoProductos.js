@@ -9,6 +9,13 @@ const ListadoProductos = ({listadoProductos, listarProductos}) => {
     console.log(response)
   }
 
+  const cambiarStock = async (productoID) => {
+    let response = await axios.put(`http://${process.env.REACT_APP_BACKEND_IP}/tienda/productos/`+ productoID + '/estadoStock')
+                        .then(res => res.status)
+    listarProductos()
+    console.log(response)
+  }
+
   const obtenerListadoProductos = () => {
     if(listadoProductos) {
       return (
@@ -19,6 +26,7 @@ const ListadoProductos = ({listadoProductos, listarProductos}) => {
             <li>{producto.precio}</li>
             <li>{producto.stock ? 'Tiene Stock' : 'Sin Stock'}</li>
             <button onClick={() => borrarProducto(producto.id)}>Borrar Producto</button>
+            <button onClick={() => cambiarStock(producto.id)}>Modificar Stock</button>
           </ul>
         ))
       )
