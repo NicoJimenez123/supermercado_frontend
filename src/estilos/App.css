@@ -1,0 +1,11 @@
+#modificarListado {
+  display: flex;
+}
+
+#agregarProducto {
+  width: 50%;
+}
+
+#modListado {
+  width: 50%;
+}
