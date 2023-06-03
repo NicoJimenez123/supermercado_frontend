@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import '../estilos/App.css'
 import { ListadoProductos } from "./ListadoProductos";
 import { AgregarProducto } from "./AgregarProducto";
+import { ModificarListado } from "./ModificarListado";
 
 const App = () => {
   const [ listado, setListado ] = useState()
@@ -15,9 +17,17 @@ const App = () => {
   }, [])
 
   return (
-    <div>
+    <div id="app">
+      <h1>Modificar Listado de Productos</h1>
+      <div id="modificarListado">
+        <div id="agregarProducto">
+          <AgregarProducto listarProductos={listarProductos}/>
+        </div>
+        <div id="modListado">
+          <ModificarListado setListado={setListado} listadoProductos={listado} listarProductos={listarProductos}/>
+        </div>
+      </div>
       <h1>Listado de Productos</h1>
-      <AgregarProducto listarProductos={listarProductos}/>
       <ListadoProductos listadoProductos={listado} listarProductos={listarProductos}/>
     </div>
   );
