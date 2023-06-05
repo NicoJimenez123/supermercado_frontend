@@ -17,7 +17,7 @@ const ListadoProductos = ({listadoProductos, listarProductos}) => {
   }
 
   const obtenerListadoProductos = () => {
-    if(listadoProductos) {
+    if(listadoProductos?.length > 0) {
       return (
         listadoProductos.map(producto => (
           <ul key={producto.id}>
