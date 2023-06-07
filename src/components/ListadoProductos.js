@@ -10,7 +10,7 @@ const ListadoProductos = ({listadoProductos, listarProductos}) => {
   }
 
   const cambiarStock = async (productoID) => {
-    let response = await axios.put(`http://${process.env.REACT_APP_BACKEND_IP}/tienda/productos/`+ productoID + '/estadoStock')
+    let response = await axios.put(`http://${process.env.REACT_APP_BACKEND_IP}/tienda/productos/`+ productoID)
                         .then(res => res.status)
     listarProductos()
     console.log(response)
