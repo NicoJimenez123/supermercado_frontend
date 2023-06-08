@@ -32,7 +32,7 @@ const ListadoProductos = ({listadoProductos, listarProductos}) => {
             <li>{producto.precio}</li>
             <li>{producto.stock }</li>
             <button onClick={() => borrarProducto(producto._id)}>Borrar Producto</button>
-            <button onClick={() => cambiarStock(producto)}>Modificar Stock</button>
+            <button onClick={() => cambiarStock(producto._id)}>Modificar Stock</button>
           </ul>
         ))
       )
