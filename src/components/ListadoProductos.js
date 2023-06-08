@@ -9,8 +9,15 @@ const ListadoProductos = ({listadoProductos, listarProductos}) => {
     console.log(response)
   }
 
-  const cambiarStock = async (productoID) => {
-    let response = await axios.put(`http://${process.env.REACT_APP_BACKEND_IP}/tienda/productos/`+ productoID)
+  const cambiarStock = async (producto) => {
+    let nuevoStock = prompt('Ingrese el nuevo Stock:')
+    producto.stock = nuevoStock
+    let response = await axios.put(`http://${process.env.REACT_APP_BACKEND_IP}/tienda/productos/`+ producto._id, {
+      nombre: producto.nombre,
+      prese: producto.prese,
+      precio: producto.precio,
+      stock: producto.stock
+    })
                         .then(res => res)
     listarProductos()
     console.log(response)
@@ -24,9 +31,9 @@ const ListadoProductos = ({listadoProductos, listarProductos}) => {
             <li>{producto.nombre}</li>
             <li>{producto.prese}</li>
             <li>{producto.precio}</li>
-            <li>{producto.stock ? 'Tiene Stock' : 'Sin Stock'}</li>
+            <li>{producto.stock}</li>
             <button onClick={() => borrarProducto(producto._id)}>Borrar Producto</button>
-            <button onClick={() => cambiarStock(producto._id)}>Modificar Stock</button>
+            <button onClick={() => cambiarStock(producto)}>Modificar Stock</button>
           </ul>
         ))
       )
