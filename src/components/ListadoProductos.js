@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
-
+import { listadoDePropiedades } from '../services/config'
+import { anadirProducto } from '../funciones/carritoHandler'
 const ListadoProductos = ({listadoProductos, listarProductos}) => {
 
   const modificarStock = () => {
@@ -25,16 +26,35 @@ const ListadoProductos = ({listadoProductos, listarProductos}) => {
   const obtenerListadoProductos = () => {
     if(listadoProductos?.length > 0) {
       return (
-        listadoProductos.map(producto => (
-          <ul key={producto._id}>
-            <li>{producto.nombre}</li>
-            <li>{producto.prese}</li>
-            <li>{producto.precio}</li>
-            <li>{producto.stock }</li>
-            <button onClick={() => borrarProducto(producto._id)}>Borrar Producto</button>
-            <button onClick={() => cambiarStock(producto._id)}>Modificar Stock</button>
-          </ul>
-        ))
+        <table>
+          <thead>
+            <tr>
+              { 
+                listadoDePropiedades.map(prop => (
+                  <th key={prop.propiedad}>{prop.propiedad_nombre}</th>
+                ))
+              }
+              <th>Botones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              listadoProductos.map(producto => (
+                <tr key={producto._id}>
+                  <td>{producto.nombre}</td>
+                  <td>{producto.prese}</td>
+                  <td>{producto.precio}</td>
+                  <td>{producto.stock }</td>
+                  <td id="botonesProducto">
+                    <button onClick={() => borrarProducto(producto._id)}>Borrar Producto</button>
+                    <button onClick={() => cambiarStock(producto._id)}>Modificar Stock</button>
+                    <button onClick={() => anadirProducto(producto)}>Añadir al Carrito</button>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
       )
     } else {
       return (
