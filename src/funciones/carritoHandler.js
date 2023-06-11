@@ -1,15 +1,26 @@
 import { listadoDePropiedades } from "../services/config"
 
-const anadirProducto = (producto) => {
-  console.log("Añadir Producto: ", producto)
+const anadirProducto = (producto, funcionActualizarCarrito) => {
+  let listado = JSON.parse(localStorage.getItem('carrito')) || []
+  listado.push(producto)
+  localStorage.setItem('carrito', JSON.stringify(listado))
+  funcionActualizarCarrito()
 }
 
-const eliminarProducto = (producto) => {
-  console.log("Eliminar Producto: ", producto)
+const eliminarProducto = (producto, funcionActualizarCarrito) => {
+  let listado = JSON.parse(localStorage.getItem('carrito')) || []
+  let p = listado.find(p => p._id === producto._id)
+  listado.splice(listado.indexOf(p), 1)
+  localStorage.setItem('carrito', JSON.stringify(listado))
+  funcionActualizarCarrito()
+}
+
+const guardarCarrito = (listadoProductos) => {
+  localStorage.setItem('carrito', JSON.stringify(listadoProductos))
 }
 
 const listarCarrito = () => {
-  console.log("Listar Productos")
+  return JSON.parse(localStorage.getItem('carrito'))
 }
 
 const incrementarUnidadesProducto = (producto) => {
@@ -20,4 +31,9 @@ const decrementarUnidadesProducto = (producto) => {
   console.log("Decrementar Producto: ", producto)
 }
 
-export { anadirProducto, eliminarProducto, listarCarrito, incrementarUnidadesProducto, decrementarUnidadesProducto }
+const eliminarCarrito = (funcionActualizarCarrito) => {
+  localStorage.clear()
+  funcionActualizarCarrito()
+}
+
+export { anadirProducto, eliminarProducto, listarCarrito, incrementarUnidadesProducto, decrementarUnidadesProducto, guardarCarrito, eliminarCarrito }
