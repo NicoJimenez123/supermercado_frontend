@@ -1,6 +1,14 @@
 const anadirProducto = (producto, funcionActualizarCarrito) => {
   let listado = JSON.parse(localStorage.getItem('carrito')) || []
-  listado.push(producto)
+  let p = listado.find(p => p._id === producto._id)
+  if(p) {
+    producto.cantidad = parseInt(p.cantidad) + 1
+    let productoIndex = listado.indexOf(p)
+    listado[productoIndex] = producto
+  } else {
+    producto.cantidad = 1;
+    listado.push(producto)
+  }
   localStorage.setItem('carrito', JSON.stringify(listado))
   funcionActualizarCarrito()
 }
