@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
 const CarritoProducto = () => {
+
   return (
-    <div>
-      Carrito
+    <div id="CarritoProducto">
+      <h2>
+        Carrito
+      </h2>
     </div>
   ) 
 }
