@@ -1,5 +1,3 @@
-import { listadoDePropiedades } from "../services/config"
-
 const anadirProducto = (producto, funcionActualizarCarrito) => {
   let listado = JSON.parse(localStorage.getItem('carrito')) || []
   listado.push(producto)
