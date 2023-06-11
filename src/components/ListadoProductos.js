@@ -2,7 +2,8 @@ import axios from 'axios'
 import React from 'react'
 import { listadoDePropiedades } from '../services/config'
 import { anadirProducto } from '../funciones/carritoHandler'
-const ListadoProductos = ({listadoProductos, listarProductos}) => {
+
+const ListadoProductos = ({listadoProductos, listarProductos, actualizarCarrito}) => {
 
   const modificarStock = () => {
     let stock = prompt("Ingrese el Stock")
@@ -48,7 +49,7 @@ const ListadoProductos = ({listadoProductos, listarProductos}) => {
                   <td id="botonesProducto">
                     <button onClick={() => borrarProducto(producto._id)}>Borrar Producto</button>
                     <button onClick={() => cambiarStock(producto._id)}>Modificar Stock</button>
-                    <button onClick={() => anadirProducto(producto)}>Añadir al Carrito</button>
+                    <button onClick={() => anadirProducto(producto, actualizarCarrito)}>Añadir al Carrito</button>
                   </td>
                 </tr>
               ))
