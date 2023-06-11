@@ -1,11 +1,5 @@
 import React, { useState } from 'react'
-
-const listadoDePropiedades = [
-  {propiedad: "nombre", propiedad_nombre: "Nombre"},
-  {propiedad: "prese", propiedad_nombre: "Peso"},
-  {propiedad: "precio", propiedad_nombre: "Precio"},
-  {propiedad: "stock", propiedad_nombre: "Stock"},
-]
+import { listadoDePropiedades } from '../services/config'
 
 const ModificarListado = ({setListado, listadoProductos, listarProductos}) => {
   const [ propiedad, setPropiedad] = useState(listadoDePropiedades[0].propiedad) // Seteo la 1ra propiedad como predeterminada

@@ -7,4 +7,11 @@ const apiBackend = () => {
   return api 
 }
 
-export { apiBackend }
+const listadoDePropiedades = [
+  {propiedad: "nombre", propiedad_nombre: "Nombre"},
+  {propiedad: "prese", propiedad_nombre: "Peso"},
+  {propiedad: "precio", propiedad_nombre: "Precio"},
+  {propiedad: "stock", propiedad_nombre: "Stock"},
+]
+
+export { apiBackend, listadoDePropiedades }
