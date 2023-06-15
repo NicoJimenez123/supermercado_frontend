@@ -1,33 +1,59 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
-const AgregarProducto = ({listarProductos}) => {
-  const [ producto, setProducto ] = useState({})
+const AgregarProducto = ({ listarProductos }) => {
+  
+  const [nombre, setNombre] = useState('');
+  const [prese, setPrese] = useState('');
+  const [precio, setPrecio] = useState('');
+  const [stock, setStock] = useState('');
 
   const crearProducto = () => {
-    let nombre = prompt("Ingrese el Nombre del Producto:")
-    let prese = prompt("Ingrese el Peso")
-    let precio = prompt("Ingrese el Precio")
-    let stock = prompt("Ingrese el Stock")
-    return { nombre, prese, precio, stock }
-  }
+    return { nombre, prese, precio, stock };
+  };
+
+
+const handleChange = (e) => {
+  setNombre(e.currentTarget.value)
+}
+const handleChange2 = (e) => {
+  setPrese(e.currentTarget.value)
+}
+const handleChange3 = (e) => {
+  setPrecio(e.currentTarget.value)
+}
+const handleChange4 = (e) => {
+  setStock(e.currentTarget.value)
+}
+
+
 
   const añadirProducto = async() => {
     let { nombre, prese, precio, stock } = crearProducto()
     let response = await axios.post(`http://${process.env.REACT_APP_BACKEND_IP}/tienda/productos`, {
       nombre, prese, precio, stock
-    }).then(res => res.data)
-    listarProductos()
-    setProducto(response)
+    }).then(res => res.data);
+    listarProductos();
+    
+    
   }
 
   return (
-    <div>
-      <button onClick={añadirProducto}>Añadir Producto</button>
-      <div>
-        Ultimo Producto agregado: {producto.nombre}
-      </div>
+
+    <div >
+    <form onSubmit={añadirProducto} >
+    <input value={nombre} type="text" onChange={handleChange} placeholder="Ingrese Nombre"/>
+    <br/>
+    <input value={prese} type="text" onChange={handleChange2} placeholder="Ingrese Presentación"/>
+    <br/>
+    <input value={precio} type="text" onChange={handleChange3} placeholder="Ingrese Precio"/>
+    <br/>
+    <input value={stock} type="text" onChange={handleChange4} placeholder="Ingrese Stock"/>
+    <br/>
+    <button >Cargar Producto</button > 
+    </form>
     </div>
+
   )
 }
 
